@@ -1,10 +1,12 @@
 package hello.springmvc.basic.request;
 
+import hello.springmvc.basic.HelloData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -82,6 +84,27 @@ public class RequestParamController {
             // -> @RequestParam MultiValueMap<String, Object> paramMap = 한 개의 키값에 다양한 값 존재할 때 사용
     ) {
         log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@RequestParam String username, @RequestParam int age) {
+        HelloData helloData = new HelloData();
+        helloData.setUsername(username);
+        helloData.setAge(age);
+
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        log.info("helloData={}", helloData); // toString() 자동 호출
+
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) { // @ModelAttribute - 생략 가능
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+
         return "ok";
     }
 }
