@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Slf4j
 @Controller
-//@RestController -> @Controller + @ResponseBody
 public class ResponseBodyController {
 
     @GetMapping("/response-body-string-v1")
