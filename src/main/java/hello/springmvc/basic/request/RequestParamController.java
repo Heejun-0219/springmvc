@@ -102,7 +102,7 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/model-attribute-v2")
-    public String modelAttributeV1(@ModelAttribute HelloData helloData) { // @ModelAttribute - 생략 가능
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
         log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
 
         return "ok";
